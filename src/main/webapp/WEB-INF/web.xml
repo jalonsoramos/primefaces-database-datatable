@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Primefaces-DataTable</display-name>
+  <listener>
+    <description>Startup Spring context</description>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>        	
+        	classpath:applicationContext.xml
+        </param-value>
+  </context-param>
+  <context-param>
+    <description>
+			Define the value returned by Application.getProjectStage(). Allowed values: Production, Development, 
+			UnitTest, SystemTest, Extension. Default value is Production.
+		</description>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  <context-param>
+    <description>Do not render comments in facelets (xhtml) pages. Default is false.</description>
+    <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <description>Default Suffix.</description>
+    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    <param-value>xhtml</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Resource Servlet</servlet-name>
+    <servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resource Servlet</servlet-name>
+    <url-pattern>/primefaces_resource/*</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>hibernateFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>hibernateFilter</filter-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </filter-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>faces/pages/footballers.xhtml</welcome-file>
+  </welcome-file-list>
+</web-app>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:dataTable var="footballer" value="#{datatableCtrl.footballers}" paginator="true"
+				     paginatorPosition="bottom" rows="10" lazy="true" dynamic="true" 
+				     loadingMessage="#{msg['entity.loading']}">
+			
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['Footballer.number']}" />
+					</f:facet>
+					<h:outputText value="#{footballer.number}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['Footballer.name']}" />
+					</f:facet>
+					<h:outputText value="#{footballer.name}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['Footballer.lastname']}" />
+					</f:facet>
+					<h:outputText value="#{footballer.lastname}" />
+				</p:column>
+		</p:dataTable>
+		
+		<h:panelGrid columns="2">
+			<p:tree value="#{treeCtrl.sourceRoot}" var="node" id="sourceTree">
+				<p:treeNode>
+					<h:outputText id="treeNode" value="#{node}"/>
+				</p:treeNode>
+				<p:draggable for="treeNode" revert="true" />
+			</p:tree>
+			
+			
+			<p:tree value="#{treeCtrl.targetRoot}" var="node" id="targetTree">
+				<p:treeNode>
+					<h:outputText value="#{node}"/>
+				</p:treeNode>
+			</p:tree>
+			<!-- <p:droppable for="targetTree" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="sourceTree"  
+						 dropListener="#{treeCtrl.addItemToTargetRoot}"/>-->
+		</h:panelGrid>
+	</h:form>	
+</h:body>
+</html>
